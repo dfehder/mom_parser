@@ -1,0 +1,12 @@
+* Overview
+The purpose of this project is to help my mom parse a bunch of text files that she has from her research and put them into a format that is easily importable for them to conduct their statistical analysis. 
+
+* Build a parser that will take the name of a file, open it, read it, output a csv file. The parser is in mom_parser.py
+** TODO take each of the lines of each file and split it. Store data in a dictionary if it's there
+** TODO For each person, extract the userid of the User
+** for each file, extract the date information (do we want the date or number of visit?)
+** TODO for each person, use a standardized list of data "columns" to generate the list of numeric data in the correct order
+** TODO Add the Subject number to the beginning of the file
+* Build a program that will open every text file in the directory it is currently in and run the parser on this file. 
+** Should the 
+** There should be a central csv file that gets created if it doesn't exist and appended to if it does
