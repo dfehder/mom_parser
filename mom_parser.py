@@ -6,7 +6,7 @@ import re, os, csv
 ## This begins the class object nutrient_observation. The point of this class is to collect the parsing steps and the export steps associated with the
 ## Retrieval into one place
 
-class nutrient_observation:
+class a_nutrient_observation:
     def __init__(self):
 
         self.subjectid = ""
