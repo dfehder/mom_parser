@@ -4,12 +4,12 @@
 import re, os, csv, sys, mom_parser
 
 ## Set path to allow importation of the mom parser class
-if "C:\\Users\\dfehder\\Documents\\dev\\mom" not in sys.path:
-    sys.path.append("C:\\Users\\dfehder\\Documents\\dev\\mom")
+if "C:\\emacs\\mom_parser\\" not in sys.path:
+    sys.path.append("C:\\emacs\\mom_parser")
 
 
 ## initializations . . . eventually we want to loope over all the open files 
-file_in_path = "C:\\Users\\dfehder\\Documents\\dev\\mom"
+file_in_path = "C:\\emacs\\mom_parser"
 file_list = os.listdir(file_in_path)
 
 
