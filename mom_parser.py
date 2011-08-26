@@ -36,6 +36,8 @@ class a_nutrient_observation:
                               'Alcohol (g)':'','Vitamin B3 - Niacin Equiv (mg)':'','Caffeine (mg)':'','Vitamin B6 (mg)':'','Choline (mg)':'',
                               'Vitamin B12 (mcg)':''}
 
+        self.remapDic = {"Vitamin B1 - Thiamin (mg)":"Vitamin B1 (mg)"}
+
     def parse_data(self, file_into_path, file_into_name):
       
         ## Take the file in path and open the file
