@@ -36,7 +36,7 @@ class a_nutrient_observation:
                               'Alcohol (g)':'','Vitamin B3 - Niacin Equiv (mg)':'','Caffeine (mg)':'','Vitamin B6 (mg)':'','Choline (mg)':'',
                               'Vitamin B12 (mcg)':''}
 
-        self.remapDic = {"Vitamin B1 - Thiamin (mg)":"Vitamin B1 (mg)"}
+        self.remapDic = {"Vitamin B1 - Thiamin (mg)":"Vitamin B1 (mg)", "Vitamin B2 - Riboflavin (mg)":"Vitamin B2 (mg)", "Vitamin B3 - Niacin (mg)":"Vitamin B3 (mg)", "Niacin Equivalents (mg)":"Vitamin B3 - Niacin Equiv (mg)"}
 
     def parse_data(self, file_into_path, file_into_name):
       
