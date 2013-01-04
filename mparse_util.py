@@ -112,12 +112,31 @@ def data_extract(file_str):
         logger.error("FUNC data_extract: No Multi Column in text")
 
 
-def load_lookup(sql_path):
+def load_matchTable(sql_path):
     """
     This function loads the sqlite file with a table called
     This table ???????
     """
+    exec1 = "select * from match_table"
+    conn = sqlite3.connect(sql_path)
+    res = conn.execute(exec1)
+    return dict(res)
+
+def load_masterNutrient(sql_path):
+    """
+    This function loads the elements of the master nutrient table
+    into a list which allows me to create the columns of the pandas
+    sheet object
+    """
+    exec1 = "select * from match_table"
+    conn = sqlite3.connect(sql_path)
+    res = conn.execute(exec1)
+
+    return list(res)
     
+    
+    
+
     
 
 ## x = np.zeros((1,),dtype=('i4,f4,a10'))
