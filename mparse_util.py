@@ -164,11 +164,11 @@ def var_extract(path, file):
         except:
             logger.error("FUNC var_extract:: %s"%(reg_pat))
             
-        logger.debug("FUNC var_extract:: start loop on %s"%(file))    
-        for elem in cases:
-            var_dict(file_str, elem)
+    logger.debug("FUNC var_extract:: start loop on %s"%(file))    
+    for elem in cases:
+        var_dict(file_str, elem)
 
-        return ret_dict
+    return ret_dict
  
     
 def variable_ctrl(file_str, pickle_file):
