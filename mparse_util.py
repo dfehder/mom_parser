@@ -2,9 +2,16 @@
 import os, pickle, re, datetime, sqlite3, logging, pandas
 import numpy as np
 
-#path1 = "/home/dcfehder/Dropbox/projects/mom_parser/"
-#file1 = "3021 diet recall 3 25 10.txt"
-#aa = mparse_util.var_extract(path1, file1)
+## path1 = "/home/dcfehder/Dropbox/projects/mom_parser/"
+## file1 = "3021 diet recall 3 25 10.txt"
+## aa = mparse_util.var_extract(path1, file1)
+## c= '/home/dcfehder/Dropbox/projects/mom_parser/mparse.sqlite'
+#this gets the ones that columnsI care about
+## ind = mparse_util.load_masterNutrient(c)
+#this puts them into a series object
+## gg = pd.Series(aa, index = ind)
+#next, you just want to add a column with that series in a DataFrame
+
 
 
 #/////////////////////////////////////////
@@ -128,19 +135,16 @@ def load_masterNutrient(sql_path):
     into a list which allows me to create the columns of the pandas
     sheet object
     """
-    exec1 = "select * from match_table"
+    exec1 = "select * from master_nutrient"
     conn = sqlite3.connect(sql_path)
     res = conn.execute(exec1)
 
-    return list(res)
+    return [elem[0] for elem in res]
     
     
     
 
     
-
-## x = np.zeros((1,),dtype=('i4,f4,a10'))
-
 
 #/////////////////////////////////////////
 #\\\          Main Functions          \\\\
