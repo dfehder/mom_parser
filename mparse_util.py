@@ -2,17 +2,6 @@
 import os, pickle, re, datetime, sqlite3, logging, pandas
 import numpy as np
 
-## path1 = "/home/dcfehder/Dropbox/projects/mom_parser/"
-## file1 = "3021 diet recall 3 25 10.txt"
-## aa = mparse_util.var_extract(path1, file1)
-## c= '/home/dcfehder/Dropbox/projects/mom_parser/mparse.sqlite'
-#this gets the ones that columnsI care about
-## ind = mparse_util.load_masterNutrient(c)
-#this puts them into a series object
-## gg = pd.Series(aa, index = ind)
-#next, you just want to add a column with that series in a DataFrame
-
-
 
 #/////////////////////////////////////////
 #\\\    Error Logging Configuration   \\\\
@@ -42,8 +31,6 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 
-
-
 #/////////////////////////////////////////
 #\\\          Sub- Functions         \\\\
 #/////////////////////////////////////////
@@ -59,7 +46,6 @@ def return_finder(file_str, strt_pos):
     logger.debug(type(end))
     return end 
 
-
 def sub_id(file_str):
     #find the subject id
     a = file_str.find("Person:")
@@ -73,7 +59,6 @@ def sub_id(file_str):
 
     else:
         logger.error("NO PERSON DELIMITER, SO FAIL IN SUB_ID FUNC")
-
 
 def sample_date(file_name):
     """
@@ -103,20 +88,16 @@ def data_extract(file_str):
     """
     a = file_str.find("Multi Column")
     logger.debug("FUNC data_extract:: start point = %s"%(str(a)))
-    if a>-1:
-        #f_sub1 = file_str[a:]
-        # now find the end point of the data
-        end_point = return_finder(file_str, a)
-        logger.debug("FUNC data_extract: end_point = %s"%(str(end_point)))
-        logger.debug(type(end_point))
-        if end_point > -1:
-            # if there is an endpoint, then return that subsection
-            f_sub2 = file_str[a:end_point]
-            return f_sub2
-        else:
-            logger.error("FUNC data_extract: No endpoint")
-    else:
-        logger.error("FUNC data_extract: No Multi Column in text")
+
+    #f_sub1 = file_str[a:]
+    # now find the end point of the data
+    end_point = return_finder(file_str, a)
+    logger.debug("FUNC data_extract: end_point = %s"%(str(end_point)))
+    logger.debug(type(end_point))
+
+    # if there is an endpoint, then return that subsection
+    f_sub2 = file_str[a:end_point]
+    return f_sub2
 
 
 def load_matchTable(sql_path):
@@ -141,6 +122,21 @@ def load_masterNutrient(sql_path):
 
     return [elem[0] for elem in res]
     
+    
+def translate(var_dict, match_path):
+    """
+    this function is meant to add 
+    """
+    #define new dict to do translation
+    new_dict = {}
+    #get the dictinary from the match_table
+    trans = load_matchTable(match_path)
+    for elem in iter(var_dict):
+        new_dict[trans.get(elem)] = var_dict[elem]
+
+    return new_dict
+        
+        
     
     
 
@@ -182,6 +178,7 @@ def var_extract(path, file):
         try:
             for elem in re.finditer(reg_pat,st):
                 namer = elem.group('nomme')
+                
                 ret_dict[namer] = elem.group('value')
                 logger.debug("FUNC var_extract:: entered %s"%(str(namer)))
         except:
@@ -192,7 +189,7 @@ def var_extract(path, file):
         var_dict(file_str, elem)
 
     return ret_dict
- 
+
     
 def variable_ctrl(file_str, pickle_file):
     #This function makes sure that each of the variables in the file is in the master sheet
