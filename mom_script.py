@@ -21,13 +21,7 @@ ind.append('date')
 ind.append('id')
 trans = mp.load_matchTable(c)
 
-
-# this puts them into a series object
-#for file1 in os.listdir(path2):
-
-
 # next, you just want to add a column with that series in a DataFrame
-
 holder = []
 for file1 in os.listdir(path2):
     print file1
@@ -42,11 +36,9 @@ for file1 in os.listdir(path2):
 panel_dict = defaultdict(list)
 for k, v in holder:
     panel_dict[k].append(v)
-    
 
 for key in panel_dict:
-    panel_dict[key] = pd.DataFrame(panel_dict[key])
-    
+    panel_dict[key] = pd.DataFrame(panel_dict[key])  
 
 outputer = pd.concat(panel_dict)
 outputer.to_csv(path1 + "diet_output.csv")
