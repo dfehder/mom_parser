@@ -6,7 +6,6 @@ import numpy as np
 #/////////////////////////////////////////
 #\\\    Error Logging Configuration   \\\\
 #/////////////////////////////////////////
- 
 
 #logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger('mparse')
@@ -29,7 +28,6 @@ ch.setFormatter(formatter)
 # add the handlers to the logger
 logger.addHandler(fh)
 logger.addHandler(ch)
-
 
 #/////////////////////////////////////////
 #\\\          Sub- Functions         \\\\
@@ -88,14 +86,17 @@ def data_extract(file_str):
     It looks for 'Multi Column' and then extracts
     until the first hard return
     """
-    a = file_str.find("Multi Column")
-    logger.debug("FUNC data_extract:: start point = %s"%(str(a)))
+    #a = file_str.find("Multi Column")
+    a = -1
+    re_obj = re.compile(r"Multi.Column")
+    if re_obj.search(file_str):
+        a = re_obj.search(file_str).start()
+        #logger.debug("FUNC data_extract:: start point = %s"%(str(a)))
 
-    #f_sub1 = file_str[a:]
-    # now find the end point of the data
+        # now find the end point of the data
     end_point = return_finder(file_str, a)
-    logger.debug("FUNC data_extract: end_point = %s"%(str(end_point)))
-    logger.debug(type(end_point))
+    #logger.debug("FUNC data_extract: end_point = %s"%(str(end_point)))
+    #logger.debug(type(end_point))
 
     # if there is an endpoint, then return that subsection
     f_sub2 = file_str[a:end_point]
@@ -184,7 +185,7 @@ def var_extract(path, file):
                 namer = elem.group('nomme')
                 
                 ret_dict[namer] = elem.group('value')
-                logger.debug("FUNC var_extract:: entered %s"%(str(namer)))
+                #logger.debug("FUNC var_extract:: entered %s"%(str(namer)))
         except:
             logger.error("FUNC var_extract:: %s"%(reg_pat))
             
@@ -194,7 +195,7 @@ def var_extract(path, file):
 
     return ret_dict
 
-    
+"""    
 def variable_ctrl(file_str, pickle_file):
     #This function makes sure that each of the variables in the file is in the master sheet
     cc = variable_ext(file_str)
@@ -215,23 +216,7 @@ def variable_ctrl(file_str, pickle_file):
         return checker
     else:
         return cc
-
-def csvLine(delim, list):
-    #This function takes a list and returns a formatted string to be written to a file given a specific seperator
-
-    ret_str = ""
-    if len(list)<1:
-        return ret_str + "\n"
-    else:
-        #add the first element without the delimitor
-        ret_str = str(list.pop(0))
-        for elem in list:
-            ret_str = ret_str + delim + str(elem)
-
-        #now add the final page break
-        ret_str = ret_str + "\n"
-
-        return ret_str
+"""
 
     
 

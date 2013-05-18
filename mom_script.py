@@ -23,6 +23,7 @@ trans = mp.load_matchTable(c)
 
 
 # this puts them into a series object
+#for file1 in os.listdir(path2):
 
 
 # next, you just want to add a column with that series in a DataFrame
@@ -48,6 +49,5 @@ for key in panel_dict:
     
 
 outputer = pd.concat(panel_dict)
-
 outputer.to_csv(path1 + "diet_output.csv")
 
