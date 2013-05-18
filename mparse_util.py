@@ -91,12 +91,8 @@ def data_extract(file_str):
     re_obj = re.compile(r"Multi.Column")
     if re_obj.search(file_str):
         a = re_obj.search(file_str).start()
-        #logger.debug("FUNC data_extract:: start point = %s"%(str(a)))
 
-        # now find the end point of the data
     end_point = return_finder(file_str, a)
-    #logger.debug("FUNC data_extract: end_point = %s"%(str(end_point)))
-    #logger.debug(type(end_point))
 
     # if there is an endpoint, then return that subsection
     f_sub2 = file_str[a:end_point]
@@ -105,8 +101,10 @@ def data_extract(file_str):
 
 def load_matchTable(sql_path):
     """
+    
     This function loads the sqlite file with a table called
     This table ???????
+    
     """
     exec1 = "select * from match_table"
     conn = sqlite3.connect(sql_path)
@@ -115,9 +113,11 @@ def load_matchTable(sql_path):
 
 def load_masterNutrient(sql_path):
     """
+    
     This function loads the elements of the master nutrient table
     into a list which allows me to create the columns of the pandas
     sheet object
+    
     """
     exec1 = "select * from master_nutrient"
     conn = sqlite3.connect(sql_path)
@@ -140,12 +140,6 @@ def translate(var_dict, match_path):
         new_dict[trans.get(elem)] = var_dict[elem]
 
     return new_dict
-        
-        
-    
-    
-
-    
 
 #/////////////////////////////////////////
 #\\\          Main Functions          \\\\
@@ -194,30 +188,6 @@ def var_extract(path, file):
         var_dict(file_str, elem)
 
     return ret_dict
-
-"""    
-def variable_ctrl(file_str, pickle_file):
-    #This function makes sure that each of the variables in the file is in the master sheet
-    cc = variable_ext(file_str)
-    f = open(pickle_file, 'r')
-    unpickler = pickle.Unpickler(f)
-    master = unpickler.load()
-
-    checker = []
-    for elem in cc.iterkeys():
-        if master.has_key(elem):
-            pass
-        else:
-            #add the element to the checker
-            checker.append(elem)
-
-    #now check to see if the loop returned any bad keys
-    if len(checker) > 0:
-        return checker
-    else:
-        return cc
-"""
-
     
 
      
