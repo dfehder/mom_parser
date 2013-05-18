@@ -11,7 +11,7 @@ import pandas as pd
 from collections import defaultdict
 
 path1 = "/home/dcfehder/Dropbox/projects/mom_parser/"
-path2 = '/home/dcfehder/Dropbox/projects/mom_parser/proc/'
+path2 = "/home/dcfehder/Dropbox/projects/mom_parser/proc/"
 #file1 = "3021 diet recall 3 25 10.txt"
 
 # this gets the ones that columnsI care about
@@ -29,14 +29,12 @@ trans = mp.load_matchTable(c)
 
 holder = []
 for file1 in os.listdir(path2):
-    #print file1
+    print file1
     data_raw = mp.var_extract(path2, file1)
     id1 =mp.sub_id(path2, file1)
     data_dict = mp.translate(data_raw, c)
     data_dict["date"] = mp.sample_date(path2 + file1)
     data_dict["id"] = id1
-    #arrays = [[id1 for i in range(len(ind))],[ind]]
-    #tuples = zip(*arrays)
     series1 = pd.Series(data_dict, index = ind)
     holder.append((id1,series1))
 
@@ -51,6 +49,5 @@ for key in panel_dict:
 
 outputer = pd.concat(panel_dict)
 
-#outputer.to_excel(path1 + "holler.xls")
-outputer.to_csv(path1 + "holler.csv")
+outputer.to_csv(path1 + "diet_output.csv")
 
