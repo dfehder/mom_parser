@@ -46,13 +46,15 @@ def return_finder(file_str, strt_pos):
     logger.debug(type(end))
     return end 
 
-def sub_id(file_str):
+def sub_id(path, file):
     #find the subject id
-    a = file_str.find("Person:")
+    f = open(path + file, "r")
+    f_str = f.read()
+    a = f_str.find("Person:")
     if a > -1:
         
         #The regular expression below attempts to extract the id number
-        m = re.match(r"Person:(?P<id_num>.*?)\r",file_str)
+        m = re.match(r"Person: (?P<id_num>[0-9]{4,8}?)",f_str)
         num = m.group('id_num').strip()
         logger.debug("got to end of sub_id func")
         return num
@@ -125,7 +127,9 @@ def load_masterNutrient(sql_path):
     
 def translate(var_dict, match_path):
     """
+    
     this function is meant to add 
+
     """
     #define new dict to do translation
     new_dict = {}
